@@ -1,17 +1,21 @@
+import Api from 'api/Api'
 import React, { FormEvent, useState } from 'react'
 import './index.sass'
 
-import Api from 'api/Api'
-
-const Login = () => {
-  const submitLogin = (event: FormEvent<HTMLFormElement>) => {
-    Api.login(username, password)
+const Signup = () => {
+  const submitSignup = (event: FormEvent<HTMLFormElement>) => {
+    Api.signup(username, password, email)
     event.preventDefault()
   }
 
   const [username, setUsername] = useState('')
   const onChangeUsername = (event: FormEvent<HTMLInputElement>) => {
     setUsername(event.currentTarget.value)
+  }
+  
+  const [email, setEmail] = useState('')
+  const onChangeEmail = (event: FormEvent<HTMLInputElement>) => {
+    setEmail(event.currentTarget.value)
   }
 
   const [password, setPassword] = useState('')
@@ -20,22 +24,25 @@ const Login = () => {
   }
 
   return (
-    <div id='Login'>
-      <form onSubmit={submitLogin}>
+    <div id='Signup'>
+      <form onSubmit={submitSignup}>
         <label>
           Username:
           <input type='text' placeholder='username' onChange={onChangeUsername} value={username}/>
         </label>
         <label>
+          Email:
+          <input type='email' placeholder='email' onChange={onChangeEmail} value={email}/>
+        </label>
+        <label>
           Password:
           <input type='password' placeholder='password' onChange={onChangePassword} value={password}/>
         </label>
-
-        <button type='submit'>Login</button>
+        <button type='submit'>Signup</button>
         <button type='reset'>Clear</button>
       </form>
     </div>
   )
 }
 
-export default Login
+export default Signup
